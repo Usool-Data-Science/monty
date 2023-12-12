@@ -33,14 +33,19 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number, char *arg);
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-int convertToInt(char *arg, unsigned int line_number, char *command);
+extern char *data_arg;
 
-void exec_push(stack_t **stack, unsigned int line_number, char *arg);
-void exec_pall(stack_t **stack, unsigned int line_number, char *arg);
-void exec_pint(stack_t **stack, unsigned int line_number, char *arg);
-void exec_pop(stack_t **stack, unsigned int line_number, char *arg);
+int file_reader(const char *file);
+int execute_cmd(char *cmd, stack_t **stack, unsigned int line_number, char *file_arg)
+
+int convertToInt(char *toInt, unsigned int line_number, char *command);
+
+void exec_push(stack_t **stack, unsigned int line_number);
+void exec_pall(stack_t **stack, unsigned int line_number);
+void exec_pint(stack_t **stack, unsigned int line_number);
+void exec_pop(stack_t **stack, unsigned int line_number);
 
 #endif /* MAIN_H */

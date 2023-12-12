@@ -1,6 +1,6 @@
 #include "monty.h"
 
-int execute_cmd(char *cmd, stack_t **stack, unsigned int line_number, char *arg)
+int execute_cmd(char *cmd, stack_t **stack, unsigned int line_number, char *file_arg)
 {
 	int i = 0;
 	instruction_t commands[] = {
@@ -8,43 +8,40 @@ int execute_cmd(char *cmd, stack_t **stack, unsigned int line_number, char *arg)
 		{"pall", exec_pall},
 		{"pint", exec_pint},
 		{"pop", exec_pop},
-		// Add more opcodes and functions as needed
+		/* Add more opcodes and functions as needed */
 		{"NULL", NULL},
 	};
-	/*
-		include a loop that checks if the cmd is a monty command
-		if its not, handle error and return 0
-		else return 1 for success
-		if it is parse it to the function that handles the command
-	*/
 
 	for (i = 0; commands[i].opcode != "NULL"; i++)
 	{
 		if (strcmp(*cmd, commands[i].opcode) == 0)
 		{
-			commands[i].f(*stack, line_number, arg);
+			commands[i].f(*stack, line_number);
 			return (1);
 		}
 	}
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, arg);
+	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
 	exit(EXIT_FAILURE);
 }
 
 int file_reader(const char *file)
 {
 	char *cmd = NULL;
-	char *arg = NULL;
+	char *file_arg = NULL;
 	stack_t *stack = NULL;
 	unsigned int line_number = 0;
-	/*
-		includes a loop that reads from file
-		line by line
-		each line would trimmed for white spaces
-		pass the pointer opcode, arg
-		if the line is empty skip it .
-	*/
-	if (execute_cmd(cmd, &stack, line_number, arg))
+
+	FILE *file_ptr = fopen(file, "r");
+
+	if (file_ptr == NULL)
+	{
+		//fprintf
+	}
+
+	if (execute_cmd(cmd, &stack, line_number, file_arg))
 		return (1);
+
+	data_arg = file_arg;
 
 	return (0);
 }
