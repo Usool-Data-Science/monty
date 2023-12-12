@@ -1,8 +1,9 @@
 #include "monty.h"
 
-int execute_cmd(char *cmd, stack_t **stack, unsigned int line_number, char *file_arg)
+int execute_cmd(char *cmd, unsigned int line_number)
 {
 	int i = 0;
+	stack_t *stack = NULL;
 	instruction_t commands[] = {
 		{"push", exec_push},
 		{"pall", exec_pall},
@@ -12,11 +13,11 @@ int execute_cmd(char *cmd, stack_t **stack, unsigned int line_number, char *file
 		{"NULL", NULL},
 	};
 
-	for (i = 0; commands[i].opcode != "NULL"; i++)
+	for (i = 0; commands[i].opcode != NULL; i++)
 	{
-		if (strcmp(*cmd, commands[i].opcode) == 0)
+		if (strcmp(cmd, commands[i].opcode) == 0)
 		{
-			commands[i].f(*stack, line_number);
+			commands[i].f(&stack, line_number);
 			return (1);
 		}
 	}
@@ -28,17 +29,16 @@ int file_reader(const char *file)
 {
 	char *cmd = NULL;
 	char *file_arg = NULL;
-	stack_t *stack = NULL;
 	unsigned int line_number = 0;
 
 	FILE *file_ptr = fopen(file, "r");
 
 	if (file_ptr == NULL)
 	{
-		//fprintf
+		/* fprintf */
 	}
 
-	if (execute_cmd(cmd, &stack, line_number, file_arg))
+	if (execute_cmd(cmd, line_number))
 		return (1);
 
 	data_arg = file_arg;
@@ -54,14 +54,18 @@ int file_reader(const char *file)
  */
 int main(int argc, char *argv[])
 {
+	const char *file;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: %s file\n", argv[0]);
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
-	const char *file = argv[1];
+	file = argv[1];
 
 	if (file_reader(file))
-		return (EXIT_SUCCESS);
+		return (1);
+
+	return (0);
 }

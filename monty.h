@@ -39,7 +39,7 @@ typedef struct instruction_s
 extern char *data_arg;
 
 int file_reader(const char *file);
-int execute_cmd(char *cmd, stack_t **stack, unsigned int line_number, char *file_arg)
+int execute_cmd(char *cmd, unsigned int line_number);
 
 int convertToInt(char *toInt, unsigned int line_number, char *command);
 
