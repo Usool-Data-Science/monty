@@ -36,4 +36,11 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number, char *arg);
 } instruction_t;
 
+int convertToInt(char *arg, unsigned int line_number, char *command);
+
+void exec_push(stack_t **stack, unsigned int line_number, char *arg);
+void exec_pall(stack_t **stack, unsigned int line_number, char *arg);
+void exec_pint(stack_t **stack, unsigned int line_number, char *arg);
+void exec_pop(stack_t **stack, unsigned int line_number, char *arg);
+
 #endif /* MAIN_H */
