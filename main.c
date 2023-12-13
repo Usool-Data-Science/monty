@@ -3,7 +3,7 @@
 char *strdup(const char *s);
 char *data_arg;
 
-int execute_cmd(char *cmd, unsigned int line_number, stack_t *stack)
+int execute_cmd(char *cmd, unsigned int line_number, stack_t *exec_stack)
 {
 	int i = 0;
 	instruction_t commands[] = {
@@ -19,8 +19,8 @@ int execute_cmd(char *cmd, unsigned int line_number, stack_t *stack)
 	{
 		if (strcmp(cmd, commands[i].opcode) == 0)
 		{
-			commands[i].f(&stack, line_number);
-			printf("searching ...\n");											/* print */
+			commands[i].f(&exec_stack, line_number);
+			/* printf("searching ...\n"); */											/* print */
 			return (1);
 		}
 

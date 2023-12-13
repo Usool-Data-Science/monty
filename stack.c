@@ -1,5 +1,4 @@
 #include "monty.h"
-stack_t *top;
 
 stack_t *push(stack_t **stack, int n)
 {
@@ -23,8 +22,7 @@ stack_t *push(stack_t **stack, int n)
 		new->next = NULL;
 
 	*stack = new;
-	top = new;
-	printf("new->n: %d, (*stack)->n: %d, top->n: %d \n", new->n, (*stack)->n, top->n);									/* print */
+	printf("new->n: %d, (*stack)->n: %d\n", new->n, (*stack)->n);									/* print */
 
 	return (new);
 }
@@ -34,7 +32,7 @@ size_t pall(stack_t **h)
 	size_t i = 0;
 	stack_t *current = *h;
 
-	while (current != NULL)
+	while (current)
 	{
 		printf("%d\n", current->n);
 		current = current->next;

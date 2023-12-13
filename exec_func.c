@@ -7,9 +7,10 @@
  */
 void exec_push(stack_t **stack, unsigned int line_number)
 {
+
 	int data = convertToInt(data_arg, line_number, "push");
-	/* printf("data: %d\n", data); */											/* print */
-	(void)line_number;
+	printf("data: %d\n", data);											/* print */
+
 	push(stack, data);
 }
 
@@ -20,8 +21,10 @@ void exec_push(stack_t **stack, unsigned int line_number)
  */
 void exec_pall(stack_t **stack, unsigned int line_number)
 {
+	size_t result;
 	(void)line_number;
-	pall(stack);
+	result = pall(stack);
+	printf("node number: %lu\n", result);
 }
 
 /**
