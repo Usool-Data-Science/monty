@@ -37,7 +37,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 extern char *data_arg;
-#define LENGTH 100
+#define LENGTH 1000
 
 int file_reader(const char *file);
 int execute_cmd(char *cmd, unsigned int line_number, stack_t *stack);

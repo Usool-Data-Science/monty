@@ -24,6 +24,7 @@ stack_t *push(stack_t **stack, int n)
 
 	*stack = new;
 	top = new;
+	printf("new->n: %d, (*stack)->n: %d, top->n: %d \n", new->n, (*stack)->n, top->n);									/* print */
 
 	return (new);
 }
@@ -31,11 +32,12 @@ stack_t *push(stack_t **stack, int n)
 size_t pall(stack_t **h)
 {
 	size_t i = 0;
+	stack_t *current = *h;
 
-	while (*h != NULL)
+	while (current != NULL)
 	{
-		printf("%d\n", (*h)->n);
-		*h = (*h)->next;
+		printf("%d\n", current->n);
+		current = current->next;
 		i++;
 	}
 

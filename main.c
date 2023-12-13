@@ -15,14 +15,18 @@ int execute_cmd(char *cmd, unsigned int line_number, stack_t *stack)
 		{"NULL", NULL},
 	};
 
-	for (i = 0; commands[i].opcode != NULL; i++)
+	while (commands[i].opcode != NULL)
 	{
 		if (strcmp(cmd, commands[i].opcode) == 0)
 		{
 			commands[i].f(&stack, line_number);
+			printf("searching ...\n");											/* print */
 			return (1);
 		}
+
+		i++;
 	}
+
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
 	exit(EXIT_FAILURE);
 }
@@ -58,6 +62,7 @@ int file_reader(const char *file)
 			fprintf(stderr, "Error executing command on line %d\n", line_number);
 			exit(EXIT_FAILURE);
 		}
+		/* printf("cmd: %s, line number: %u, data_arg: %s\n", cmd, line_number, data_arg); */					/* print */
 		free(cmd);
 	}
 
@@ -84,6 +89,9 @@ int main(int argc, char *argv[])
 	file = argv[1];
 
 	file_reader(file);
+	/* if (file_reader(file))
+		printf("file reader return 1\n"); */
+	/* print */
 
 	return (0);
 }
