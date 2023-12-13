@@ -2,24 +2,32 @@
 
 char *strdup(const char *s);
 char *data_arg;
+stack_t *stack = NULL;
 
-int execute_cmd(char *cmd, unsigned int line_number, stack_t *exec_stack)
+/**
+ * execute_cmd - sort execute command
+ * @cmd: command
+ * @line_number: line number
+ * Return: 1 on success
+ */
+int execute_cmd(char *cmd, unsigned int line_number)
 {
 	int i = 0;
+
 	instruction_t commands[] = {
 		{"push", exec_push},
 		{"pall", exec_pall},
 		{"pint", exec_pint},
 		{"pop", exec_pop},
 		/* Add more opcodes and functions as needed */
+		{NULL, NULL}
 	};
 
 	while (commands[i].opcode != NULL)
 	{
 		if (strcmp(cmd, commands[i].opcode) == 0)
 		{
-			commands[i].f(&exec_stack, line_number);
-			/* printf("searching ...\n"); */											/* print */
+			commands[i].f(&stack, line_number);
 			return (1);
 		}
 
@@ -31,8 +39,11 @@ int execute_cmd(char *cmd, unsigned int line_number, stack_t *exec_stack)
 }
 
 /**
- * file_reader - */
-int file_reader(char *file, stack_t **stack)
+ * file_reader - reads from file
+ * @file: file
+ * Return: 1 on succes and 0 otherwise
+ */
+int file_reader(char *file)
 {
 	char *cmd = NULL;
 	unsigned int line_number = 0;
@@ -57,15 +68,14 @@ int file_reader(char *file, stack_t **stack)
 		cmd = strdup(trimmed_line);
 		data_arg = strtok(NULL, " \t\n");
 
-		if (!execute_cmd(cmd, line_number, *stack))
+		if (!execute_cmd(cmd, line_number))
 		{
 			fprintf(stderr, "Error executing command on line %d\n", line_number);
 			exit(EXIT_FAILURE);
 		}
-		/* printf("cmd: %s, line number: %u, data_arg: %s\n", cmd, line_number, data_arg); */					/* print */
+
 		free(cmd);
 	}
-
 	fclose(file_ptr);
 	return (1);
 }
@@ -79,7 +89,6 @@ int file_reader(char *file, stack_t **stack)
 int main(int argc, char *argv[])
 {
 	char *file;
-	stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -89,10 +98,7 @@ int main(int argc, char *argv[])
 
 	file = argv[1];
 
-	file_reader(file, &stack);
-	/* if (file_reader(file))
-		printf("file reader return 1\n"); */
-	/* print */
+	file_reader(file);
 
 	return (0);
 }

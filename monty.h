@@ -22,7 +22,6 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -36,11 +35,13 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
 extern char *data_arg;
+
 #define LENGTH 1000
 
-int file_reader(char *file, stack_t **stack);
-int execute_cmd(char *cmd, unsigned int line_number, stack_t *exec_stack);
+int file_reader(char *file);
+int execute_cmd(char *cmd, unsigned int line_number);
 
 stack_t *push(stack_t **stack, int n);
 size_t pall(stack_t **h);
