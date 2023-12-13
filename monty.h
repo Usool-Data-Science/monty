@@ -17,10 +17,11 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -31,8 +32,25 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+extern char *data_arg;
+
+#define LENGTH 1000
+
+int file_reader(char *file);
+int execute_cmd(char *cmd, unsigned int line_number);
+
+stack_t *push(stack_t **stack, int n);
+size_t pall(stack_t **h);
+
+int convertToInt(char *toInt, unsigned int line_number, char *command);
+
+void exec_push(stack_t **stack, unsigned int line_number);
+void exec_pall(stack_t **stack, unsigned int line_number);
+void exec_pint(stack_t **stack, unsigned int line_number);
+void exec_pop(stack_t **stack, unsigned int line_number);
 
 #endif /* MAIN_H */
