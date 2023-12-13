@@ -32,7 +32,7 @@ int execute_cmd(char *cmd, unsigned int line_number, stack_t *exec_stack)
 
 /**
  * file_reader - */
-int file_reader(const char *file, stack_t **stack)
+int file_reader(char *file, stack_t **stack)
 {
 	char *cmd = NULL;
 	unsigned int line_number = 0;
@@ -78,7 +78,7 @@ int file_reader(const char *file, stack_t **stack)
  */
 int main(int argc, char *argv[])
 {
-	const char *file;
+	char *file;
 	stack_t *stack = NULL;
 
 	if (argc != 2)
