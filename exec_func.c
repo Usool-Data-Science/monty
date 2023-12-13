@@ -73,6 +73,22 @@ void exec_pint(stack_t **stack, unsigned int line_number)
  */
 void exec_pop(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+	stack_t *del;
+
+	if (stack == NULL || *stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	del = *stack;
+
+	if (del->next != NULL)
+	{
+		*stack = del->next;
+		del->next->prev = del->prev;
+	}
+	else
+		*stack = NULL;
+
+	free(del);
 }
