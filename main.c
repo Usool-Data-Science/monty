@@ -1,9 +1,11 @@
 #include "monty.h"
 
-int execute_cmd(char *cmd, unsigned int line_number)
+char *strdup(const char *s);
+char *data_arg;
+
+int execute_cmd(char *cmd, unsigned int line_number, stack_t *stack)
 {
 	int i = 0;
-	stack_t *stack = NULL;
 	instruction_t commands[] = {
 		{"push", exec_push},
 		{"pall", exec_pall},
@@ -28,22 +30,39 @@ int execute_cmd(char *cmd, unsigned int line_number)
 int file_reader(const char *file)
 {
 	char *cmd = NULL;
-	char *file_arg = NULL;
 	unsigned int line_number = 0;
+	char line[LENGTH];
+	char *trimmed_line;
+	stack_t *stack = NULL;
 
 	FILE *file_ptr = fopen(file, "r");
 
 	if (file_ptr == NULL)
 	{
-		/* fprintf */
+		fprintf(stderr, "Error: Can't open file %s\n", file);
+		exit(EXIT_FAILURE);
+	}
+	while (fgets(line, sizeof(line), file_ptr) != NULL)
+	{
+		line_number++;
+
+		trimmed_line = strtok(line, " \t\n");
+		if (trimmed_line == NULL)
+			continue;
+
+		cmd = strdup(trimmed_line);
+		data_arg = strtok(NULL, " \t\n");
+
+		if (!execute_cmd(cmd, line_number, stack))
+		{
+			fprintf(stderr, "Error executing command on line %d\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+		free(cmd);
 	}
 
-	if (execute_cmd(cmd, line_number))
-		return (1);
-
-	data_arg = file_arg;
-
-	return (0);
+	fclose(file_ptr);
+	return (1);
 }
 
 /**
@@ -64,8 +83,7 @@ int main(int argc, char *argv[])
 
 	file = argv[1];
 
-	if (file_reader(file))
-		return (1);
+	file_reader(file);
 
 	return (0);
 }
