@@ -12,7 +12,6 @@ int execute_cmd(char *cmd, unsigned int line_number, stack_t *exec_stack)
 		{"pint", exec_pint},
 		{"pop", exec_pop},
 		/* Add more opcodes and functions as needed */
-		{"NULL", NULL},
 	};
 
 	while (commands[i].opcode != NULL)
@@ -33,13 +32,12 @@ int execute_cmd(char *cmd, unsigned int line_number, stack_t *exec_stack)
 
 /**
  * file_reader - */
-int file_reader(const char *file)
+int file_reader(const char *file, stack_t **stack)
 {
 	char *cmd = NULL;
 	unsigned int line_number = 0;
 	char line[LENGTH];
 	char *trimmed_line;
-	stack_t *stack = NULL;
 
 	FILE *file_ptr = fopen(file, "r");
 
@@ -59,7 +57,7 @@ int file_reader(const char *file)
 		cmd = strdup(trimmed_line);
 		data_arg = strtok(NULL, " \t\n");
 
-		if (!execute_cmd(cmd, line_number, stack))
+		if (!execute_cmd(cmd, line_number, *stack))
 		{
 			fprintf(stderr, "Error executing command on line %d\n", line_number);
 			exit(EXIT_FAILURE);
@@ -81,6 +79,7 @@ int file_reader(const char *file)
 int main(int argc, char *argv[])
 {
 	const char *file;
+	stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -90,7 +89,7 @@ int main(int argc, char *argv[])
 
 	file = argv[1];
 
-	file_reader(file);
+	file_reader(file, &stack);
 	/* if (file_reader(file))
 		printf("file reader return 1\n"); */
 	/* print */

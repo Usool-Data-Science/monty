@@ -24,6 +24,9 @@ stack_t *push(stack_t **stack, int n)
 	*stack = new;
 	printf("new->n: %d, (*stack)->n: %d\n", new->n, (*stack)->n);									/* print */
 
+	if ((*stack)->next != NULL)
+		printf("new->n: %d, (*stack)->n: %d\n", new->n, (*stack)->next->n);
+
 	return (new);
 }
 

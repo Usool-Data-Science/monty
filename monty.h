@@ -21,7 +21,7 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
-extern stack_t *stack;
+
 
 /**
  * struct instruction_s - opcode and its function
@@ -39,7 +39,7 @@ typedef struct instruction_s
 extern char *data_arg;
 #define LENGTH 1000
 
-int file_reader(const char *file);
+int file_reader(const char *file, stack_t **stack);
 int execute_cmd(char *cmd, unsigned int line_number, stack_t *exec_stack);
 
 stack_t *push(stack_t **stack, int n);
