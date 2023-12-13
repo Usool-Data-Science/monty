@@ -1,5 +1,11 @@
 #include "monty.h"
 
+/**
+ * convertToInt - convert str to int
+ * @toInt: str to convert
+ * @line_number: line number
+ * Return: Value
+ */
 int convertToInt(char *toInt, unsigned int line_number, char *command)
 {
 	int value = atoi(toInt);
