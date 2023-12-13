@@ -31,6 +31,8 @@ int execute_cmd(char *cmd, unsigned int line_number, stack_t *stack)
 	exit(EXIT_FAILURE);
 }
 
+/**
+ * file_reader - */
 int file_reader(const char *file)
 {
 	char *cmd = NULL;

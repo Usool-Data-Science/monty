@@ -4,6 +4,7 @@
  * convertToInt - convert str to int
  * @toInt: str to convert
  * @line_number: line number
+ * @command: opcode
  * Return: Value
  */
 int convertToInt(char *toInt, unsigned int line_number, char *command)
