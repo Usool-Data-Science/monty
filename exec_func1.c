@@ -102,7 +102,7 @@ void exec_nop(stack_t **stack, unsigned int line_number)
 
 /**
  * free_stack - frees stack
- * @stack:
+ * @stack: desc
  */
 void free_stack(stack_t *stack)
 {
