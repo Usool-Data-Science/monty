@@ -21,6 +21,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{"pop", exec_pop},
 		{"swap", exec_swap},
 		{"add", exec_add},
+		{"sub", exec_sub},
 		{"nop", exec_nop},
 		/* Add more opcodes and functions as needed */
 		{NULL, NULL}
@@ -102,6 +103,8 @@ int main(int argc, char *argv[])
 	file = argv[1];
 
 	file_reader(file);
+
+	free_stack(stack);
 
 	return (0);
 }
