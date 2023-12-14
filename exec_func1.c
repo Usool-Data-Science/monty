@@ -122,7 +122,7 @@ void exec_div(stack_t **stack, unsigned int line_number)
 
 	div = second->n / top->n;
 
-
+	/* Store div result into node 2 and del node 1*/
 	second->n = div;
 
 	*stack = top->next;
