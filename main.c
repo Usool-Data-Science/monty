@@ -116,6 +116,7 @@ int convertToInt(char *toInt, unsigned int line_number, char *command)
 
 	value = atoi(toInt);
 
+	/* Check for wrong conversion */
 	if (value == 0 && *toInt != '0')
 	{
 		if (file_ptr)
