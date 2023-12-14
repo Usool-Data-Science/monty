@@ -52,6 +52,7 @@ void exec_add(stack_t **stack, unsigned int line_number)
 
 	sum = top->n + second->n;
 
+	/* Put the sum on the second node and drop the first node*/
 	second->n = sum;
 
 	*stack = top->next;
