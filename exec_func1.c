@@ -65,7 +65,7 @@ void exec_add(stack_t **stack, unsigned int line_number)
 /**
  * exec_sub - subtracts the top element of the stack from
  * the second top element of the stack.
- * @stack: pointer to stack
+ * @stack: pointer to the stack
  * @line_number: line number
  */
 void exec_sub(stack_t **stack, unsigned int line_number)
