@@ -25,6 +25,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{"nop", exec_nop},
 		{"div", exec_div},
 		{"mul", exec_mul},
+		{"mod", exec_mod},
 		/* Add more opcodes and functions as needed */
 		{NULL, NULL}
 	};

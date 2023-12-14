@@ -138,6 +138,7 @@ void exec_mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *top, *second;
 	int mul;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
