@@ -73,6 +73,7 @@ void exec_pstr(stack_t **stack, unsigned int line_number)
 	stack_t *current = *stack;
 	(void)line_number;
 
+	/*transverse the string on the top node*/
 	while (current != NULL && current->n != 0 && current->n >= 0 &&
 	current->n <= 127)
 	{
