@@ -75,7 +75,7 @@ int file_reader(char *file)
 			continue;
 
 		trimmed_line = strtok(line, " \t\n");
-		if (trimmed_line == NULL)
+		if (trimmed_line == NULL || trimmed_line[0] == '#')
 			continue;
 
 		strncpy(cmd, trimmed_line, sizeof(cmd) - 1);
