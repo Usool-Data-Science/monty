@@ -84,12 +84,13 @@ void exec_pop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	del = *stack;
-
+	/* Check there more than one node shift to the next*/
 	if (del->next != NULL)
 	{
 		*stack = del->next;
 		del->next->prev = del->prev;
 	}
+	/* Otherwise clear the node */
 	else
 		*stack = NULL;
 
