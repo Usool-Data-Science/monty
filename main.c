@@ -35,6 +35,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{NULL, NULL}
 	};
 
+	/* Transverse the instruction array and execute the right one */
 	while (commands[i].opcode != NULL)
 	{
 		if (strcmp(cmd, commands[i].opcode) == 0)
