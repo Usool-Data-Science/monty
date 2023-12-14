@@ -71,6 +71,9 @@ int file_reader(char *file)
 	{
 		line_number++;
 
+		if (line[0] == '#' || (line[0] == ' ' && line[1] == '#'))
+			continue;
+
 		trimmed_line = strtok(line, " \t\n");
 		if (trimmed_line == NULL)
 			continue;
