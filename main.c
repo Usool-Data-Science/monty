@@ -2,6 +2,7 @@
 
 char *strdup(const char *s);
 char *data_arg;
+FILE *file_ptr;
 stack_t *stack = NULL;
 
 /**
@@ -39,6 +40,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 	}
 
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
+	fclose(file_ptr);
 	exit(EXIT_FAILURE);
 }
 
@@ -54,11 +56,12 @@ int file_reader(char *file)
 	char line[LENGTH];
 	char *trimmed_line;
 
-	FILE *file_ptr = fopen(file, "r");
+	file_ptr = fopen(file, "r");
 
 	if (file_ptr == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", file);
+		fclose(file_ptr);
 		exit(EXIT_FAILURE);
 	}
 	while (fgets(line, sizeof(line), file_ptr) != NULL)
@@ -72,16 +75,44 @@ int file_reader(char *file)
 		cmd = strdup(trimmed_line);
 		data_arg = strtok(NULL, " \t\n");
 
-		if (!execute_cmd(cmd, line_number))
-		{
-			fprintf(stderr, "Error executing command on line %d\n", line_number);
-			exit(EXIT_FAILURE);
-		}
+		execute_cmd(cmd, line_number);
 
 		free(cmd);
 	}
 	fclose(file_ptr);
 	return (1);
+}
+
+/**
+ * convertToInt - convert str to int
+ * @toInt: str to convert
+ * @line_number: line number
+ * @command: opcode
+ * Return: Value
+ */
+int convertToInt(char *toInt, unsigned int line_number, char *command)
+{
+	int value;
+
+	if (toInt == NULL)
+	{
+		fclose(file_ptr);
+		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
+		free_stack(stack);
+		exit(EXIT_FAILURE);
+	}
+
+	value = atoi(toInt);
+
+	if (value == 0 && *toInt != '0')
+	{
+		fclose(file_ptr);
+		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
+		free_stack(stack);
+		exit(EXIT_FAILURE);
+	}
+
+	return (value);
 }
 
 /**

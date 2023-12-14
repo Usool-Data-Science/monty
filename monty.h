@@ -37,14 +37,12 @@ typedef struct instruction_s
 } instruction_t;
 
 extern char *data_arg;
+extern FILE *file_ptr;
 
 #define LENGTH 1020
 
 int file_reader(char *file);
 int execute_cmd(char *cmd, unsigned int line_number);
-
-stack_t *push(stack_t **stack, int n);
-size_t pall(stack_t **h);
 
 int convertToInt(char *toInt, unsigned int line_number, char *command);
 
