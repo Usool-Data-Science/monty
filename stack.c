@@ -1,5 +1,5 @@
 #include "monty.h"
-stack_t *top;
+static stack_t *top;
 
 stack_t *push(stack_t **stack, int n)
 {
@@ -29,10 +29,16 @@ stack_t *push(stack_t **stack, int n)
 	return (new);
 }
 
-size_t pall(stack_t **h)
+size_t pall(stack_t **top)
 {
 	size_t i = 0;
-	stack_t *current = *h;
+	stack_t *current = *top;
+
+	if (*top == NULL || current == NULL)
+	{
+		perror("The stack is empty");
+		exit(EXIT_FAILURE);
+	}
 
 	while (current != NULL)
 	{
@@ -40,6 +46,7 @@ size_t pall(stack_t **h)
 		current = current->next;
 		i++;
 	}
+	printf("%ld", i);
 
 	return (i);
 }

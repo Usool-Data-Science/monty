@@ -22,7 +22,7 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
-extern stack_t *top;
+extern static stack_t *top;
 
 /**
  * struct instruction_s - opcode and its function
@@ -42,6 +42,11 @@ extern char *data_arg;
 
 int file_reader(const char *file);
 int execute_cmd(char *cmd, unsigned int line_number, stack_t *stack);
+void exec_push(stack_t **stack, unsigned int line_number);
+void exec_pall(stack_t **stack, unsigned int line_number);
+void exec_pint(stack_t **stack, unsigned int line_number);
+void exec_pop(stack_t **stack, unsigned int line_number);
+
 
 stack_t *push(stack_t **stack, int n);
 size_t pall(stack_t **h);

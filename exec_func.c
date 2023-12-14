@@ -3,7 +3,7 @@
 void exec_push(stack_t **stack, unsigned int line_number)
 {
 	int data = convertToInt(data_arg, line_number, "push");
-	/* printf("data: %d\n", data); */											/* print */
+	/* printf("data: %d\n", data); print */
 	(void)line_number;
 	push(stack, data);
 }
