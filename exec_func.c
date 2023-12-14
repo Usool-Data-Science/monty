@@ -91,6 +91,11 @@ void exec_pop(stack_t **stack, unsigned int line_number)
 	free(del);
 }
 
+/**
+ * stack_len - gets the len
+ * @h: stack pointer
+ * Return: the num of node
+ */
 size_t stack_len(const stack_t *h)
 {
 	size_t i = 0;
