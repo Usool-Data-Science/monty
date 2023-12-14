@@ -29,6 +29,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{"mod", exec_mod},
 		{"pchar", exec_pchar},
 		{"pstr", exec_pstr},
+		{"rotl", exec_rotl},
 		/* Add more opcodes and functions as needed */
 		{NULL, NULL}
 	};
