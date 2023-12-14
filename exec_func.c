@@ -104,6 +104,7 @@ void exec_pop(stack_t **stack, unsigned int line_number)
  */
 void exec_nop(stack_t **stack, unsigned int line_number)
 {
+	/* Just ignore all the parameters */
 	(void)stack;
 	(void)line_number;
 }
