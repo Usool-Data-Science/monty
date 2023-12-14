@@ -127,3 +127,33 @@ void exec_div(stack_t **stack, unsigned int line_number)
 
 	free(top);
 }
+
+/**
+ * exec_mul -  dmultiplies the second top element of the stack with
+ * the top element of the stack.
+ * @stack: pointer to stack
+ * @line_number: line number
+ */
+void exec_mul(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top, *second;
+	int mul;
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	top = *stack;
+	second = top->next;
+
+	mul = second->n * top->n;
+
+	second->n = mul;
+
+	*stack = top->next;
+	if (*stack != NULL)
+		(*stack)->prev = NULL;
+
+	free(top);
+}
