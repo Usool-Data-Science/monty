@@ -133,7 +133,7 @@ void exec_div(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * exec_mul -  dmultiplies the second top element of the stack with
+ * exec_mul - multiplies the second top element of the stack with
  * the top element of the stack.
  * @stack: pointer to stack
  * @line_number: line number
@@ -156,6 +156,7 @@ void exec_mul(stack_t **stack, unsigned int line_number)
 
 	second->n = mul;
 
+	/* Skip the first node and free it*/
 	*stack = top->next;
 	if (*stack != NULL)
 		(*stack)->prev = NULL;
