@@ -57,6 +57,7 @@ data_arg *file_reader(FILE *file)
 	int line_no = 0, buffer_size = 256;
 	data_arg *lists = NULL;
 	char *buffer = (char *)malloc(buffer_size);
+	char *buffer_words;
 	data_arg *new_lists = (data_arg *)malloc(sizeof(data_arg));
 
 	if (new_lists == NULL || buffer == NULL)
@@ -73,19 +74,28 @@ data_arg *file_reader(FILE *file)
 
 	while (fgets(buffer, buffer_size, file) != NULL)
 	{
-		new_lists->command = strdup(buffer);
-		new_lists->line_number = line_no + 1;
-		new_lists->num_token = token_counter(new_lists->command);
+		buffer_words = strdup(buffer);
+		line_no++;
+		new_lists->command = tokenizer(buffer);
+		new_lists->line_number = line_no;
+		new_lists->num_token = token_counter(buffer_words);
 		new_lists->next = NULL;
 		/* Add new_list to all the command lists */
 		if (lists == NULL)
-		{
 			lists = new_lists;
-		}
 		else
 		{
-			lists->next = new_lists;
+			data_arg *temp = lists;
+
+			while (temp->next != NULL)
+				temp = temp->next;
+			temp->next = new_lists;
 		}
+		printf("L%d attached %d tokens with opcode:%s and arg: %s to node successfully\n",
+				new_lists->line_number,
+				new_lists->num_token,
+				new_lists->command->opcode,
+				new_lists->command->arg);
 	}
 
 	return (lists);

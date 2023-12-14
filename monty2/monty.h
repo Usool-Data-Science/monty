@@ -43,19 +43,20 @@ typedef struct instructions_s
   * @num_token: The count of token in a command.
   * @next: The next node of command.
   */
-typedef struct data_argument
-{
-	char *command;
-	unsigned int line_number;
-	int num_token;
-	struct data_argument *next;
-} data_arg;
-
 typedef struct token
 {
 	char *opcode;
 	char *arg;
 } token;
+
+typedef struct data_argument
+{
+	token *command;
+	unsigned int line_number;
+	int num_token;
+	//token *command_tok;
+	struct data_argument *next;
+} data_arg;
 
 /* LIST OF FUNCTION PROTOTYES from functions.c file */
 int token_counter(char *word);
