@@ -54,7 +54,7 @@ token *tokenizer(char *command)
   */
 data_arg *file_reader(FILE *file)
 {
-	int line_no = 0, buffer_size = 256;
+	int counter = 0, line_no = 0, buffer_size = 256;
 	data_arg *lists = NULL;
 	char *buffer = (char *)malloc(buffer_size);
 	char *buffer_words;
@@ -76,6 +76,7 @@ data_arg *file_reader(FILE *file)
 	{
 		buffer_words = strdup(buffer);
 		line_no++;
+		/*check if num_token == 2 */
 		new_lists->command = tokenizer(buffer);
 		new_lists->line_number = line_no;
 		new_lists->num_token = token_counter(buffer_words);
@@ -86,7 +87,6 @@ data_arg *file_reader(FILE *file)
 		else
 		{
 			data_arg *temp = lists;
-
 			while (temp->next != NULL)
 				temp = temp->next;
 			temp->next = new_lists;
@@ -97,6 +97,11 @@ data_arg *file_reader(FILE *file)
 				new_lists->command->opcode,
 				new_lists->command->arg);
 	}
-
+	while (lists != NULL)
+	{
+		counter++;
+		lists = lists->next;
+	}
+	printf("Node Count: %d\n", counter);
 	return (lists);
 }

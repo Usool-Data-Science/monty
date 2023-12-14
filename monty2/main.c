@@ -28,7 +28,6 @@ void execute_command(stack_t **stack, unsigned int line_number,
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	int line_no = 0;
 	//token *line_command = NULL;
 	data_arg *command_list = NULL;
 
@@ -49,19 +48,20 @@ int main(int argc, char *argv[])
 
 	/* 3. Read each line of the file into a linked list*/
 	command_list = file_reader(file);
-	
 	/* 4. Iterate over each command in the node and execute it*/
 	while (command_list != NULL)
 	{
-		/* Check number of args per line */
 		if (command_list->num_token != 2)
+		{
+			perror("Error: Token < 2\n");
 			exit(EXIT_FAILURE);
-		printf("Printing line_command in main\n");
-		line_no++;
+		}
+		/* Check number of args per line */
 		execute_command(result_stack,
 				command_list->line_number,
 				(command_list->command)->opcode,
 				(command_list->command)->arg);
+		command_list = command_list->next;
 	}
 	/* 5. Return after successful execution */
 	return (0);
