@@ -30,6 +30,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{"pchar", exec_pchar},
 		{"pstr", exec_pstr},
 		{"rotl", exec_rotl},
+		{"rotr", exec_rotr},
 		/* Add more opcodes and functions as needed */
 		{NULL, NULL}
 	};

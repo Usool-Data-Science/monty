@@ -62,5 +62,6 @@ void exec_mod(stack_t **stack, unsigned int line_number);
 void exec_pchar(stack_t **stack, unsigned int line_number);
 void exec_pstr(stack_t **stack, unsigned int line_number);
 void exec_rotl(stack_t **stack, unsigned int line_number);
+void exec_rotr(stack_t **stack, unsigned int line_number);
 
 #endif /* MAIN_H */
