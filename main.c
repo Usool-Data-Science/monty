@@ -1,6 +1,5 @@
 #include "monty.h"
 
-char *strdup(const char *s);
 char *data_arg;
 FILE *file_ptr;
 stack_t *stack = NULL;
@@ -40,7 +39,8 @@ int execute_cmd(char *cmd, unsigned int line_number)
 	}
 
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
-	fclose(file_ptr);
+	if(file_ptr)
+		fclose(file_ptr);
 	exit(EXIT_FAILURE);
 }
 
@@ -51,7 +51,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
  */
 int file_reader(char *file)
 {
-	char *cmd = NULL;
+	char cmd[LENGTH] = "";
 	unsigned int line_number = 0;
 	char line[LENGTH];
 	char *trimmed_line;
@@ -72,12 +72,10 @@ int file_reader(char *file)
 		if (trimmed_line == NULL)
 			continue;
 
-		cmd = strdup(trimmed_line);
+		strncpy(cmd, trimmed_line, sizeof(cmd) - 1);
 		data_arg = strtok(NULL, " \t\n");
 
 		execute_cmd(cmd, line_number);
-
-		free(cmd);
 	}
 	fclose(file_ptr);
 	return (1);
@@ -96,7 +94,8 @@ int convertToInt(char *toInt, unsigned int line_number, char *command)
 
 	if (toInt == NULL)
 	{
-		fclose(file_ptr);
+		if(file_ptr)
+			fclose(file_ptr);
 		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
 		free_stack(stack);
 		exit(EXIT_FAILURE);
@@ -106,7 +105,8 @@ int convertToInt(char *toInt, unsigned int line_number, char *command)
 
 	if (value == 0 && *toInt != '0')
 	{
-		fclose(file_ptr);
+		if(file_ptr)
+			fclose(file_ptr);
 		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
 		free_stack(stack);
 		exit(EXIT_FAILURE);

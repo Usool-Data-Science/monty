@@ -13,7 +13,8 @@ void exec_push(stack_t **stack, unsigned int line_number)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		fclose(file_ptr);
+		if(file_ptr)
+			fclose(file_ptr);
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
