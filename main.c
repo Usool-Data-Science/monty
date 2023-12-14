@@ -39,7 +39,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 	}
 
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
-	if(file_ptr)
+	if (file_ptr)
 		fclose(file_ptr);
 	exit(EXIT_FAILURE);
 }
@@ -94,7 +94,7 @@ int convertToInt(char *toInt, unsigned int line_number, char *command)
 
 	if (toInt == NULL)
 	{
-		if(file_ptr)
+		if (file_ptr)
 			fclose(file_ptr);
 		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
 		free_stack(stack);
@@ -105,7 +105,7 @@ int convertToInt(char *toInt, unsigned int line_number, char *command)
 
 	if (value == 0 && *toInt != '0')
 	{
-		if(file_ptr)
+		if (file_ptr)
 			fclose(file_ptr);
 		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
 		free_stack(stack);
