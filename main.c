@@ -80,6 +80,7 @@ int file_reader(char *file)
 		if (line[0] == '#' || (line[0] == ' ' && line[1] == '#'))
 			continue;
 
+		/* Tokenize the string and check conditions */
 		trimmed_line = strtok(line, " \t\n");
 		if (trimmed_line == NULL || trimmed_line[0] == '#')
 			continue;
