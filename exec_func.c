@@ -94,19 +94,12 @@ void exec_pop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * stack_len - gets the len
- * @h: stack pointer
- * Return: the num of node
+ * exec_nop - does nothing
+ * @stack: stack pointer
+ * @line_number: line number
  */
-size_t stack_len(const stack_t *h)
+void exec_nop(stack_t **stack, unsigned int line_number)
 {
-	size_t i = 0;
-
-	while (h != NULL)
-	{
-		h = h->next;
-		i++;
-	}
-
-	return (i);
+	(void)stack;
+	(void)line_number;
 }

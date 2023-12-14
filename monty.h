@@ -56,5 +56,6 @@ void exec_swap(stack_t **stack, unsigned int line_number);
 void exec_add(stack_t **stack, unsigned int line_number);
 void exec_nop(stack_t **stack, unsigned int line_number);
 void exec_sub(stack_t **stack, unsigned int line_number);
+void exec_div(stack_t **stack, unsigned int line_number);
 
 #endif /* MAIN_H */

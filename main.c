@@ -23,6 +23,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{"add", exec_add},
 		{"sub", exec_sub},
 		{"nop", exec_nop},
+		{"div", exec_div},
 		/* Add more opcodes and functions as needed */
 		{NULL, NULL}
 	};

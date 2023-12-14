@@ -60,7 +60,8 @@ void exec_add(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * exec_sub - add adds the top two elements of the stack.
+ * exec_sub - subtracts the top element of the stack from
+ * the second top element of the stack.
  * @stack: pointer to stack
  * @line_number: line number
  */
@@ -71,7 +72,7 @@ void exec_sub(stack_t **stack, unsigned int line_number)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -90,29 +91,39 @@ void exec_sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * exec_nop - does nothing
- * @stack: stack pointer
+ * exec_div -  divides the second top element of the stack by
+ * the top element of the stack.
+ * @stack: pointer to stack
  * @line_number: line number
  */
-void exec_nop(stack_t **stack, unsigned int line_number)
+void exec_div(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
-}
+	stack_t *top, *second;
+	int div;
 
-/**
- * free_stack - frees stack
- * @stack: desc
- */
-void free_stack(stack_t *stack)
-{
-	stack_t *current;
-
-	while (stack != NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		current = stack;
-		stack = stack->next;
-
-		free(current);
+		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
 	}
+
+	top = *stack;
+	second = top->next;
+
+	if (top->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	div = second->n / top->n;
+
+
+	second->n = div;
+
+	*stack = top->next;
+	if (*stack != NULL)
+		(*stack)->prev = NULL;
+
+	free(top);
 }
