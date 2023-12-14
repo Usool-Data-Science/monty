@@ -44,7 +44,7 @@ void exec_pall(stack_t **stack, unsigned int line_number)
 	stack_t *current = *stack;
 	(void)line_number;
 
-	/**/
+	/* Transverse over all node and print n*/
 	while (current)
 	{
 		printf("%d\n", current->n);
