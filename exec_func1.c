@@ -58,3 +58,14 @@ void exec_add(stack_t **stack, unsigned int line_number)
 
 	free(top);
 }
+
+/**
+ * exec_nop - does nothing
+ * @stack: stack pointer
+ * @line_number: line number
+ */
+void exec_nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}
