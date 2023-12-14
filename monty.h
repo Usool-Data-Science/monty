@@ -60,5 +60,6 @@ void exec_div(stack_t **stack, unsigned int line_number);
 void exec_mul(stack_t **stack, unsigned int line_number);
 void exec_mod(stack_t **stack, unsigned int line_number);
 void exec_pchar(stack_t **stack, unsigned int line_number);
+void exec_pstr(stack_t **stack, unsigned int line_number);
 
 #endif /* MAIN_H */
