@@ -7,6 +7,7 @@
  */
 void exec_swap(stack_t **stack, unsigned int line_number)
 {
+	/* Specify the top and the second layer*/
 	stack_t *top, *second;
 
 	if (*stack == NULL || (*stack)->next == NULL)
@@ -26,6 +27,7 @@ void exec_swap(stack_t **stack, unsigned int line_number)
 	second->next = top;
 	top->prev = second;
 
+	/* Dont forget to reassign the stack*/
 	*stack = second;
 }
 
