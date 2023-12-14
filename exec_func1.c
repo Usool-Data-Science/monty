@@ -84,6 +84,7 @@ void exec_sub(stack_t **stack, unsigned int line_number)
 
 	sub = second->n - top->n;
 
+	/* Push the result to second node and drop first node*/
 	second->n = sub;
 
 	*stack = top->next;
