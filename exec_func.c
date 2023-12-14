@@ -10,6 +10,7 @@ void exec_push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 	int n = convertToInt(data_arg, line_number, "push");
 
+	/*Check if the allocation is successful*/
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
@@ -43,6 +44,7 @@ void exec_pall(stack_t **stack, unsigned int line_number)
 	stack_t *current = *stack;
 	(void)line_number;
 
+	/**/
 	while (current)
 	{
 		printf("%d\n", current->n);
