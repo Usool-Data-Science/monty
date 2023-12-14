@@ -59,6 +59,7 @@ void exec_pall(stack_t **stack, unsigned int line_number)
  */
 void exec_pint(stack_t **stack, unsigned int line_number)
 {
+	/* Check the top of the stack and print its n*/
 	if (*stack)
 		printf("%d\n", (*stack)->n);
 	else
