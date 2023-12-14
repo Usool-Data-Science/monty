@@ -32,7 +32,7 @@ void exec_swap(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * exec_add - add adds the top two elements of the stack.
+ * exec_add - adds the top two elements of the stack.
  * @stack: pointer to stack
  * @line_number: line number
  */
