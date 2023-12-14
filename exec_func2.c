@@ -128,7 +128,7 @@ void exec_rotr(stack_t **stack, unsigned int line_number)
 		{
 			last = last->next;
 		}
-
+		/* Now lets rotate it */
 		last->prev->next = NULL;
 		last->prev = NULL;
 		last->next = *stack;
