@@ -55,7 +55,7 @@ token *tokenizer(char *command)
 data_arg *file_reader(FILE *file)
 {
 	int counter = 0, line_no = 0, buffer_size = 256;
-	data_arg *lists = NULL;
+	data_arg *lists = NULL, *temp = NULL;
 	char *buffer = (char *)malloc(buffer_size);
 	char *buffer_words;
 	data_arg *new_lists = (data_arg *)malloc(sizeof(data_arg));
@@ -86,10 +86,8 @@ data_arg *file_reader(FILE *file)
 			lists = new_lists;
 		else
 		{
-			data_arg *temp = lists;
-			while (temp->next != NULL)
-				temp = temp->next;
 			temp->next = new_lists;
+			temp = temp->next;
 		}
 		printf("L%d attached %d tokens with opcode:%s and arg: %s to node successfully\n",
 				new_lists->line_number,
@@ -97,7 +95,8 @@ data_arg *file_reader(FILE *file)
 				new_lists->command->opcode,
 				new_lists->command->arg);
 	}
-	while (lists != NULL)
+	temp = lists;
+	while (temp != NULL)
 	{
 		counter++;
 		lists = lists->next;
