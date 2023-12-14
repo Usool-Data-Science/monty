@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * exec_mod -  computes the rest of the division of the
+ * exec_mod -  computes the remainder of the division of the
  * second top element of the stack by the top element of the stack.
  * @stack: pointer to stack
  * @line_number: line number
@@ -29,7 +29,7 @@ void exec_mod(stack_t **stack, unsigned int line_number)
 	mod = second->n % top->n;
 
 	second->n = mod;
-
+	/*Again skip the top*/
 	*stack = top->next;
 	if (*stack != NULL)
 		(*stack)->prev = NULL;
