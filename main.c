@@ -144,11 +144,11 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: %s file\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
-
+	/* 1. Import the file */
 	file = argv[1];
-
+	/* 2. Read and parse the file. */
 	file_reader(file);
-
+	/* 3. Avoid memory leaks. */
 	free_stack(stack);
 
 	return (0);
