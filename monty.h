@@ -48,9 +48,11 @@ size_t pall(stack_t **h);
 
 int convertToInt(char *toInt, unsigned int line_number, char *command);
 
+size_t stack_len(const stack_t *h);
 void exec_push(stack_t **stack, unsigned int line_number);
 void exec_pall(stack_t **stack, unsigned int line_number);
 void exec_pint(stack_t **stack, unsigned int line_number);
 void exec_pop(stack_t **stack, unsigned int line_number);
+void exec_swap(stack_t **stack, unsigned int line_number);
 
 #endif /* MAIN_H */

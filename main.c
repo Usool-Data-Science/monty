@@ -19,6 +19,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{"pall", exec_pall},
 		{"pint", exec_pint},
 		{"pop", exec_pop},
+		{"swap", exec_swap},
 		/* Add more opcodes and functions as needed */
 		{NULL, NULL}
 	};

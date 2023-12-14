@@ -38,7 +38,6 @@ void exec_push(stack_t **stack, unsigned int line_number)
  */
 void exec_pall(stack_t **stack, unsigned int line_number)
 {
-	size_t i = 0;
 	stack_t *current = *stack;
 	(void)line_number;
 
@@ -46,7 +45,6 @@ void exec_pall(stack_t **stack, unsigned int line_number)
 	{
 		printf("%d\n", current->n);
 		current = current->next;
-		i++;
 	}
 }
 
@@ -91,4 +89,17 @@ void exec_pop(stack_t **stack, unsigned int line_number)
 		*stack = NULL;
 
 	free(del);
+}
+
+size_t stack_len(const stack_t *h)
+{
+	size_t i = 0;
+
+	while (h != NULL)
+	{
+		h = h->next;
+		i++;
+	}
+
+	return (i);
 }
