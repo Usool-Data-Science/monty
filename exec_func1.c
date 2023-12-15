@@ -4,16 +4,19 @@
  * exec_swap - swap swaps the top two elements of the stack.
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_swap(stack_t **stack, unsigned int line_number)
+void exec_swap(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	/* Specify the top and the second layer*/
 	stack_t *top, *second;
 
+	(void)data_arg;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	top = *stack;
@@ -35,16 +38,19 @@ void exec_swap(stack_t **stack, unsigned int line_number)
  * exec_add - adds the top two elements of the stack.
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_add(stack_t **stack, unsigned int line_number)
+void exec_add(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *top, *second;
 	int sum = 0;
 
+	(void)data_arg;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	top = *stack;
@@ -67,16 +73,19 @@ void exec_add(stack_t **stack, unsigned int line_number)
  * the second top element of the stack.
  * @stack: pointer to the stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_sub(stack_t **stack, unsigned int line_number)
+void exec_sub(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *top, *second;
 	int sub = 0;
 
+	(void)data_arg;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	top = *stack;
@@ -99,16 +108,19 @@ void exec_sub(stack_t **stack, unsigned int line_number)
  * the top element of the stack.
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_div(stack_t **stack, unsigned int line_number)
+void exec_div(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *top, *second;
 	int div;
 
+	(void)data_arg;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	top = *stack;
@@ -117,7 +129,7 @@ void exec_div(stack_t **stack, unsigned int line_number)
 	if (top->n == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	div = second->n / top->n;
@@ -137,16 +149,19 @@ void exec_div(stack_t **stack, unsigned int line_number)
  * the top element of the stack.
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_mul(stack_t **stack, unsigned int line_number)
+void exec_mul(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *top, *second;
 	int mul;
 
+	(void)data_arg;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	top = *stack;

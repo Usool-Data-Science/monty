@@ -4,8 +4,9 @@
  * exec_push - pushes an element to the stack.
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_push(stack_t **stack, unsigned int line_number)
+void exec_push(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *new;
 	int n;
@@ -20,10 +21,8 @@ void exec_push(stack_t **stack, unsigned int line_number)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		if (file_ptr)
-			fclose(file_ptr);
 		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	new->n = n;
@@ -33,8 +32,11 @@ void exec_push(stack_t **stack, unsigned int line_number)
 	{
 		new->next = *stack;
 		(*stack)->prev = new;
-	} else
+	}
+	else
+	{
 		new->next = NULL;
+	}
 
 	*stack = new;
 }
@@ -44,11 +46,13 @@ void exec_push(stack_t **stack, unsigned int line_number)
  *	starting from the top of the stack.
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_pall(stack_t **stack, unsigned int line_number)
+void exec_pall(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *current = *stack;
 	(void)line_number;
+	(void)data_arg;
 
 	/* Transverse over all node and print n*/
 	while (current)
@@ -62,16 +66,19 @@ void exec_pall(stack_t **stack, unsigned int line_number)
  * exec_pint - print top opcode function
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_pint(stack_t **stack, unsigned int line_number)
+void exec_pint(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	/* Check the top of the stack and print its n*/
+	(void)data_arg;
+
 	if (*stack)
 		printf("%d\n", (*stack)->n);
 	else
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 }
 
@@ -79,15 +86,18 @@ void exec_pint(stack_t **stack, unsigned int line_number)
  * exec_pop - pop opcode function
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_pop(stack_t **stack, unsigned int line_number)
+void exec_pop(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *del;
+
+	(void)data_arg;
 
 	if (stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 	del = *stack;
 	/* Check there more than one node shift to the next*/
@@ -107,10 +117,12 @@ void exec_pop(stack_t **stack, unsigned int line_number)
  * exec_nop - does nothing
  * @stack: stack pointer
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_nop(stack_t **stack, unsigned int line_number)
+void exec_nop(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	/* Just ignore all the parameters */
 	(void)stack;
 	(void)line_number;
+	(void)data_arg;
 }

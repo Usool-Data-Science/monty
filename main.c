@@ -1,9 +1,6 @@
 #include "monty.h"
 
-char *global(char *nothing);
-char *data_arg;
-FILE *file_ptr;
-stack_t *stack = NULL;
+global_t *global;
 
 /**
  * execute_cmd - sort execute command
@@ -40,7 +37,7 @@ int execute_cmd(char *cmd, unsigned int line_number)
 	{
 		if (strcmp(cmd, commands[i].opcode) == 0)
 		{
-			commands[i].f(&stack, line_number);
+			commands[i].f(&(global->stack), line_number, global->data_arg);
 			return (1);
 		}
 
@@ -48,8 +45,8 @@ int execute_cmd(char *cmd, unsigned int line_number)
 	}
 
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
-	if (file_ptr)
-		fclose(file_ptr);
+	if (global->file_ptr)
+		fclose(global->file_ptr);
 	exit(EXIT_FAILURE);
 }
 
@@ -65,15 +62,15 @@ int file_reader(char *file)
 	char line[LENGTH];
 	char *trimmed_line;
 
-	file_ptr = fopen(file, "r");
+	global->file_ptr = fopen(file, "r");
 
-	if (file_ptr == NULL)
+	if (global->file_ptr == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", file);
-		fclose(file_ptr);
-		exit(EXIT_FAILURE);
+		fclose(global->file_ptr);
+		exit_failure(global);
 	}
-	while (fgets(line, sizeof(line), file_ptr) != NULL)
+	while (fgets(line, sizeof(line), global->file_ptr) != NULL)
 	{
 		line_number++;
 
@@ -86,47 +83,11 @@ int file_reader(char *file)
 			continue;
 
 		strncpy(cmd, trimmed_line, sizeof(cmd) - 1);
-		data_arg = strtok(NULL, " \t\n");
+		global->data_arg = strtok(NULL, " \t\n");
 
 		execute_cmd(cmd, line_number);
 	}
-	fclose(file_ptr);
 	return (1);
-}
-
-/**
- * convertToInt - convert str to int
- * @toInt: str to convert
- * @line_number: line number
- * @command: opcode
- * Return: Value
- */
-int convertToInt(char *toInt, unsigned int line_number, char *command)
-{
-	int value;
-
-	if (toInt == NULL)
-	{
-		if (file_ptr)
-			fclose(file_ptr);
-		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
-
-	value = atoi(toInt);
-
-	/* Check for wrong conversion */
-	if (value == 0 && *toInt != '0')
-	{
-		if (file_ptr)
-			fclose(file_ptr);
-		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
-
-	return (value);
 }
 
 /**
@@ -139,17 +100,30 @@ int main(int argc, char *argv[])
 {
 	char *file;
 
+	global = malloc(sizeof(global_t));
+	if (global == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	global->data_arg = NULL;
+	global->file_ptr = NULL;
+	global->stack = NULL;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: %s file\n", argv[0]);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 	/* 1. Import the file */
 	file = argv[1];
 	/* 2. Read and parse the file. */
 	file_reader(file);
-	/* 3. Avoid memory leaks. */
-	free_stack(stack);
+
+	free_stack(global->stack);
+	if (global->file_ptr)
+		fclose(global->file_ptr);
+	free(global);
 
 	return (0);
 }
