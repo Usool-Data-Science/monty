@@ -8,8 +8,14 @@
 void exec_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
-	int n = convertToInt(data_arg, line_number, "push");
+	int n;
 
+	if (data_arg == NULL)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	n = convertToInt(data_arg, line_number, "push");
 	/*Check if the allocation is successful*/
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
