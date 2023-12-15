@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * exec_mod -  computes the remainder of the division of the
+ * exec_mod -  computes the rest of the division of the
  * second top element of the stack by the top element of the stack.
  * @stack: pointer to stack
  * @line_number: line number
@@ -32,7 +32,7 @@ void exec_mod(stack_t **stack, unsigned int line_number, char *data_arg)
 	mod = second->n % top->n;
 
 	second->n = mod;
-	/*Again skip the top*/
+
 	*stack = top->next;
 	if (*stack != NULL)
 		(*stack)->prev = NULL;
@@ -59,7 +59,6 @@ void exec_pchar(stack_t **stack, unsigned int line_number, char *data_arg)
 	}
 
 	ascii_value = (*stack)->n;
-	/* Check for range of ascii value */
 	if (ascii_value < 0 || ascii_value > 127)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
@@ -81,7 +80,6 @@ void exec_pstr(stack_t **stack, unsigned int line_number, char *data_arg)
 	(void)line_number;
 	(void)data_arg;
 
-	/*transverse the string on the top node*/
 	while (current != NULL && current->n != 0 && current->n >= 0 &&
 	current->n <= 127)
 	{
@@ -140,7 +138,7 @@ void exec_rotr(stack_t **stack, unsigned int line_number, char *data_arg)
 		{
 			last = last->next;
 		}
-		/* Now lets rotate it */
+
 		last->prev->next = NULL;
 		last->prev = NULL;
 		last->next = *stack;

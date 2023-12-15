@@ -9,15 +9,8 @@
 void exec_push(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *new;
-	int n;
+	int n = convertToInt(data_arg, line_number, "push");
 
-	if (data_arg == NULL)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	n = convertToInt(data_arg, line_number, "push");
-	/*Check if the allocation is successful*/
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
@@ -54,7 +47,6 @@ void exec_pall(stack_t **stack, unsigned int line_number, char *data_arg)
 	(void)line_number;
 	(void)data_arg;
 
-	/* Transverse over all node and print n*/
 	while (current)
 	{
 		printf("%d\n", current->n);
@@ -70,7 +62,6 @@ void exec_pall(stack_t **stack, unsigned int line_number, char *data_arg)
  */
 void exec_pint(stack_t **stack, unsigned int line_number, char *data_arg)
 {
-	/* Check the top of the stack and print its n*/
 	(void)data_arg;
 
 	if (*stack)
@@ -100,13 +91,12 @@ void exec_pop(stack_t **stack, unsigned int line_number, char *data_arg)
 		exit_failure(global);
 	}
 	del = *stack;
-	/* Check there more than one node shift to the next*/
+
 	if (del->next != NULL)
 	{
 		*stack = del->next;
 		del->next->prev = del->prev;
 	}
-	/* Otherwise clear the node */
 	else
 		*stack = NULL;
 
@@ -121,7 +111,6 @@ void exec_pop(stack_t **stack, unsigned int line_number, char *data_arg)
  */
 void exec_nop(stack_t **stack, unsigned int line_number, char *data_arg)
 {
-	/* Just ignore all the parameters */
 	(void)stack;
 	(void)line_number;
 	(void)data_arg;

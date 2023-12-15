@@ -32,7 +32,6 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{NULL, NULL}
 	};
 
-	/* Transverse the instruction array and execute the right one */
 	while (commands[i].opcode != NULL)
 	{
 		if (strcmp(cmd, commands[i].opcode) == 0)
@@ -77,7 +76,6 @@ int file_reader(char *file)
 		if (line[0] == '#' || (line[0] == ' ' && line[1] == '#'))
 			continue;
 
-		/* Tokenize the string and check conditions */
 		trimmed_line = strtok(line, " \t\n");
 		if (trimmed_line == NULL || trimmed_line[0] == '#')
 			continue;
@@ -115,9 +113,9 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: %s file\n", argv[0]);
 		exit_failure(global);
 	}
-	/* 1. Import the file */
+
 	file = argv[1];
-	/* 2. Read and parse the file. */
+
 	file_reader(file);
 
 	free_stack(global->stack);
