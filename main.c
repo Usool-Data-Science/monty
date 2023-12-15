@@ -1,5 +1,6 @@
 #include "monty.h"
 
+char *block_betty(char *blocks_betty_global);
 global_t *global;
 
 /**
@@ -66,7 +67,6 @@ int file_reader(char *file)
 	if (global->file_ptr == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", file);
-		fclose(global->file_ptr);
 		exit_failure(global);
 	}
 	while (fgets(line, sizeof(line), global->file_ptr) != NULL)
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: %s file\n", argv[0]);
+		fprintf(stderr, "USAGE: monty file\n");
 		exit_failure(global);
 	}
 

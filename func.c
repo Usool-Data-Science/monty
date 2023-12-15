@@ -62,7 +62,8 @@ void exit_failure(global_t *global)
  */
 int convertToInt(char *toInt, unsigned int line_number, char *command)
 {
-	int value;
+	int value, i;
+	char *temp = toInt;
 
 	if (toInt == NULL)
 	{
@@ -70,13 +71,27 @@ int convertToInt(char *toInt, unsigned int line_number, char *command)
 		exit_failure(global);
 	}
 
-	value = atoi(toInt);
+	if (*temp == '+' || *temp == '-')
+		temp++;
 
-	if (value == 0 && *toInt != '0')
+	for (i = 0; temp[i] != '\0'; i++)
+	{
+		if (!isdigit(temp[i]))
+		{
+			fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
+			exit_failure(global);
+		}
+	}
+
+	value = atoi(temp);
+
+	if (value == 0 && temp[0] != '0')
 	{
 		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
 		exit_failure(global);
 	}
 
+	if (toInt[0] == '-')
+		return (value * -1);
 	return (value);
 }
