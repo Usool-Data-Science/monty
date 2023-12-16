@@ -41,6 +41,7 @@ typedef struct instruction_s
  * @data_arg: data arg
  * @file_ptr: file pointer
  * @stack: stack
+ * @mode: desc
  *
  * Description: Struct for global variable
  */
@@ -49,6 +50,7 @@ typedef struct global_s
 	char *data_arg;
 	FILE *file_ptr;
 	stack_t *stack;
+	int mode;
 } global_t;
 
 extern global_t *global;
@@ -78,5 +80,10 @@ void exec_pchar(stack_t **stack, unsigned int line_number, char *data_arg);
 void exec_pstr(stack_t **stack, unsigned int line_number, char *data_arg);
 void exec_rotl(stack_t **stack, unsigned int line_number, char *data_arg);
 void exec_rotr(stack_t **stack, unsigned int line_number, char *data_arg);
+
+void exec_stack(stack_t **stack, unsigned int line_number, char *data_arg);
+void exec_queue(stack_t **stack, unsigned int line_number, char *data_arg);
+void push(stack_t **stack, unsigned int line_number, char *data_arg);
+void enqueue(stack_t **stack, unsigned int line_number, char *data_arg);
 
 #endif /* MAIN_H */

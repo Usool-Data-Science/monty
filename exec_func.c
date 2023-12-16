@@ -8,30 +8,12 @@
  */
 void exec_push(stack_t **stack, unsigned int line_number, char *data_arg)
 {
-	stack_t *new;
-	int n = convertToInt(data_arg, line_number, "push");
-
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
+	if (global->mode)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit_failure(global);
-	}
-
-	new->n = n;
-	new->prev = NULL;
-
-	if (*stack != NULL)
-	{
-		new->next = *stack;
-		(*stack)->prev = new;
+		push(stack, line_number, data_arg);
 	}
 	else
-	{
-		new->next = NULL;
-	}
-
-	*stack = new;
+		enqueue(stack, line_number, data_arg);
 }
 
 /**

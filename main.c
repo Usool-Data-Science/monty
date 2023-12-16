@@ -29,6 +29,8 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{"pstr", exec_pstr},
 		{"rotl", exec_rotl},
 		{"rotr", exec_rotr},
+		{"stack", exec_stack},
+		{"queue", exec_queue},
 		/* Add more opcodes and functions as needed */
 		{NULL, NULL}
 	};
@@ -107,6 +109,7 @@ int main(int argc, char *argv[])
 	global->data_arg = NULL;
 	global->file_ptr = NULL;
 	global->stack = NULL;
+	global->mode = 1;
 
 	if (argc != 2)
 	{
