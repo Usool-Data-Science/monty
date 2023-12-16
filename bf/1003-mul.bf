@@ -37,4 +37,7 @@ convert to ascii
 print
 >>[.<<]<[<<]>>.
 
+newline
+
+>>>>>>>++++++++++.
 Credit: Stack overflow
