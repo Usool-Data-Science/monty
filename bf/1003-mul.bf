@@ -39,5 +39,4 @@ print
 
 newline
 
->>>>>>>++++++++++.
-Credit: Stack overflow
+>>>>>>>>>>>++++++++++.
