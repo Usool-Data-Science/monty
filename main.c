@@ -1,9 +1,7 @@
 #include "monty.h"
 
-char *global(char *nothing);
-char *data_arg;
-FILE *file_ptr;
-stack_t *stack = NULL;
+char *block_betty(char *blocks_betty_global);
+global_t *global;
 
 /**
  * execute_cmd - sort execute command
@@ -31,16 +29,17 @@ int execute_cmd(char *cmd, unsigned int line_number)
 		{"pstr", exec_pstr},
 		{"rotl", exec_rotl},
 		{"rotr", exec_rotr},
+		{"stack", exec_stack},
+		{"queue", exec_queue},
 		/* Add more opcodes and functions as needed */
 		{NULL, NULL}
 	};
 
-	/* Transverse the instruction array and execute the right one */
 	while (commands[i].opcode != NULL)
 	{
 		if (strcmp(cmd, commands[i].opcode) == 0)
 		{
-			commands[i].f(&stack, line_number);
+			commands[i].f(&(global->stack), line_number, global->data_arg);
 			return (1);
 		}
 
@@ -48,8 +47,8 @@ int execute_cmd(char *cmd, unsigned int line_number)
 	}
 
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
-	if (file_ptr)
-		fclose(file_ptr);
+	if (global->file_ptr)
+		fclose(global->file_ptr);
 	exit(EXIT_FAILURE);
 }
 
@@ -65,68 +64,30 @@ int file_reader(char *file)
 	char line[LENGTH];
 	char *trimmed_line;
 
-	file_ptr = fopen(file, "r");
+	global->file_ptr = fopen(file, "r");
 
-	if (file_ptr == NULL)
+	if (global->file_ptr == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", file);
-		fclose(file_ptr);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
-	while (fgets(line, sizeof(line), file_ptr) != NULL)
+	while (fgets(line, sizeof(line), global->file_ptr) != NULL)
 	{
 		line_number++;
 
 		if (line[0] == '#' || (line[0] == ' ' && line[1] == '#'))
 			continue;
 
-		/* Tokenize the string and check conditions */
 		trimmed_line = strtok(line, " \t\n");
 		if (trimmed_line == NULL || trimmed_line[0] == '#')
 			continue;
 
 		strncpy(cmd, trimmed_line, sizeof(cmd) - 1);
-		data_arg = strtok(NULL, " \t\n");
+		global->data_arg = strtok(NULL, " \t\n");
 
 		execute_cmd(cmd, line_number);
 	}
-	fclose(file_ptr);
 	return (1);
-}
-
-/**
- * convertToInt - convert str to int
- * @toInt: str to convert
- * @line_number: line number
- * @command: opcode
- * Return: Value
- */
-int convertToInt(char *toInt, unsigned int line_number, char *command)
-{
-	int value;
-
-	if (toInt == NULL)
-	{
-		if (file_ptr)
-			fclose(file_ptr);
-		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
-
-	value = atoi(toInt);
-
-	/* Check for wrong conversion */
-	if (value == 0 && *toInt != '0')
-	{
-		if (file_ptr)
-			fclose(file_ptr);
-		fprintf(stderr, "L%u: usage: %s integer\n", line_number, command);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
-
-	return (value);
 }
 
 /**
@@ -139,17 +100,31 @@ int main(int argc, char *argv[])
 {
 	char *file;
 
-	if (argc != 2)
+	global = malloc(sizeof(global_t));
+	if (global == NULL)
 	{
-		fprintf(stderr, "USAGE: %s file\n", argv[0]);
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	/* 1. Import the file */
+	global->data_arg = NULL;
+	global->file_ptr = NULL;
+	global->stack = NULL;
+	global->mode = 1;
+
+	if (argc != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit_failure(global);
+	}
+
 	file = argv[1];
-	/* 2. Read and parse the file. */
+
 	file_reader(file);
-	/* 3. Avoid memory leaks. */
-	free_stack(stack);
+
+	free_stack(global->stack);
+	if (global->file_ptr)
+		fclose(global->file_ptr);
+	free(global);
 
 	return (0);
 }

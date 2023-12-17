@@ -1,20 +1,23 @@
 #include "monty.h"
 
 /**
- * exec_mod -  computes the remainder of the division of the
+ * exec_mod -  computes the rest of the division of the
  * second top element of the stack by the top element of the stack.
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_mod(stack_t **stack, unsigned int line_number)
+void exec_mod(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *top, *second;
 	int mod;
 
+	(void)data_arg;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	top = *stack;
@@ -23,13 +26,13 @@ void exec_mod(stack_t **stack, unsigned int line_number)
 	if (top->n == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	mod = second->n % top->n;
 
 	second->n = mod;
-	/*Again skip the top*/
+
 	*stack = top->next;
 	if (*stack != NULL)
 		(*stack)->prev = NULL;
@@ -41,23 +44,25 @@ void exec_mod(stack_t **stack, unsigned int line_number)
  * exec_pchar - prints the char at the top of the stack
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_pchar(stack_t **stack, unsigned int line_number)
+void exec_pchar(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	int ascii_value;
+
+	(void)data_arg;
 
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	ascii_value = (*stack)->n;
-	/* Check for range of ascii value */
 	if (ascii_value < 0 || ascii_value > 127)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_failure(global);
 	}
 
 	printf("%c\n", ascii_value);
@@ -67,13 +72,14 @@ void exec_pchar(stack_t **stack, unsigned int line_number)
  * exec_pstr - prints the string starting at the top of the stack
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_pstr(stack_t **stack, unsigned int line_number)
+void exec_pstr(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	stack_t *current = *stack;
 	(void)line_number;
+	(void)data_arg;
 
-	/*transverse the string on the top node*/
 	while (current != NULL && current->n != 0 && current->n >= 0 &&
 	current->n <= 127)
 	{
@@ -88,10 +94,12 @@ void exec_pstr(stack_t **stack, unsigned int line_number)
  * exec_rotl - rotates the stack to the top
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_rotl(stack_t **stack, unsigned int line_number)
+void exec_rotl(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	(void)line_number;
+	(void)data_arg;
 
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
@@ -115,10 +123,12 @@ void exec_rotl(stack_t **stack, unsigned int line_number)
  * exec_rotr - rotates the stack to the bottom
  * @stack: pointer to stack
  * @line_number: line number
+ * @data_arg: data arg
  */
-void exec_rotr(stack_t **stack, unsigned int line_number)
+void exec_rotr(stack_t **stack, unsigned int line_number, char *data_arg)
 {
 	(void)line_number;
+	(void)data_arg;
 
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
@@ -128,7 +138,7 @@ void exec_rotr(stack_t **stack, unsigned int line_number)
 		{
 			last = last->next;
 		}
-		/* Now lets rotate it */
+
 		last->prev->next = NULL;
 		last->prev = NULL;
 		last->next = *stack;
