@@ -1,6 +1,5 @@
 # a comment
 push 1
-push 10
-push 5
-mod
+push 2
+push 3
 pall
