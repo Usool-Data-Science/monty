@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-12-17T08:10:05.724Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="qpnYcjAd1EiQzJQQAtjs" version="22.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2023-12-17T08:20:05.284Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="NaYvjscB27cI4Wk-S1Tj" version="22.1.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="794" dy="446" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="1">
+    <mxGraphModel dx="836" dy="1296" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="1">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -41,7 +41,7 @@
         <mxCell id="0wCFsdbysDWYnxFJeVAg-3" value="args != 2" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="90" y="200" width="70" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="0wCFsdbysDWYnxFJeVAg-5" value="Print usage error and exit failure" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="0wCFsdbysDWYnxFJeVAg-5" value="Print usage error and exit failure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="205" y="210" width="75" height="50" as="geometry" />
         </mxCell>
         <mxCell id="0wCFsdbysDWYnxFJeVAg-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="0wCFsdbysDWYnxFJeVAg-12" target="0wCFsdbysDWYnxFJeVAg-14">
@@ -65,7 +65,7 @@
         <mxCell id="0wCFsdbysDWYnxFJeVAg-12" value="arg[1] is a valid file?" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="90" y="307.5" width="70" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="0wCFsdbysDWYnxFJeVAg-14" value="Print can&#39;t open file error and exit failure" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="0wCFsdbysDWYnxFJeVAg-14" value="Print can&#39;t open file error and exit failure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="205" y="315" width="75" height="55" as="geometry" />
         </mxCell>
         <mxCell id="0wCFsdbysDWYnxFJeVAg-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
@@ -100,8 +100,8 @@
         <mxCell id="0wCFsdbysDWYnxFJeVAg-20" value="Valid args?" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="300" y="405" width="60" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="0wCFsdbysDWYnxFJeVAg-25" value="Print invalid&lt;br&gt;args error and exit failure" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="292.5" y="307.5" width="75" height="55" as="geometry" />
+        <mxCell id="0wCFsdbysDWYnxFJeVAg-25" value="Print invalid&lt;br&gt;args error and exit failure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="292.5" y="315.01" width="75" height="55" as="geometry" />
         </mxCell>
         <mxCell id="0wCFsdbysDWYnxFJeVAg-49" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" target="0wCFsdbysDWYnxFJeVAg-48">
           <mxGeometry relative="1" as="geometry">
@@ -160,8 +160,14 @@
         <mxCell id="0wCFsdbysDWYnxFJeVAg-74" value="Print no opcode found error and exit failure" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="695" y="310.63" width="80" height="63.75" as="geometry" />
         </mxCell>
-        <mxCell id="0wCFsdbysDWYnxFJeVAg-77" value="END" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="0wCFsdbysDWYnxFJeVAg-77" value="END" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="700" y="225" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="0wCFsdbysDWYnxFJeVAg-99" value="&lt;h1&gt;&lt;font face=&quot;Helvetica&quot;&gt;FLOW CHART OF MONTY PROJECT&lt;/font&gt;&lt;/h1&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="182.5" y="5" width="432" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0wCFsdbysDWYnxFJeVAg-100" value="Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). It relies on a unique stack, with specific instructions to manipulate it. The goal of this project is to create an interpreter for Monty ByteCodes files. The implementation of this project can be found on this github repo:&amp;nbsp;https://github.com/Usool-Data-Science/monty" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="189" y="40" width="659" height="42" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
